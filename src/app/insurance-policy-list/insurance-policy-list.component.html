@@ -1,0 +1,25 @@
+<div class="container-fluid">
+	<h1>Lista de polizas de seguro</h1>
+	<button type="button" class="btn btn-primary" [routerLink]="['/Poliza']">Añadir nueva poliza</button>
+	<button *ngIf="user.IsAdmin" type="button" class="btn btn-danger m-1" [routerLink]="['/UserList']">Eliminar usuarios</button>
+	<div class="col-md-12">
+		<h2 *ngIf="insurancePolicies.length == 0">
+			No tienes polizas agrega una por favor
+		</h2>
+		<div *ngIf="insurancePolicies.length != 0">
+			<h2>Polizas creadas </h2>
+			<ul class="list-group">
+				<li class="list-group-item" *ngFor="let police of insurancePolicies">
+					A nombre de: <strong> {{police.AccountHolder.firstName}} </strong> con beneficiario a: <strong> {{police.Beneficiaries[0].Name}} </strong>
+					<button type="button" [routerLink]="['/Poliza/', police._id]" class="btn btn-outline-primary m-1">
+						Editar
+					</button>
+					<button type="button" class="btn btn-outline-danger" (click)="deletePolicy(police._id)">
+						Eliminar
+					</button>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+</div>
